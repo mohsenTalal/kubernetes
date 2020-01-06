@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: curl
+  namespace:
+  labels:
+    run: curl
+spec:
+  containers:
+  - name: container
+    image: kalise/curl
+    command:
+      - sleep
+      - "3600"

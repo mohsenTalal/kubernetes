@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: jira
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+spec:
+  rules:
+  - host: jira.kube.noverit.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: jira
+          servicePort: 8080
+
+

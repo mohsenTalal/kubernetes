@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  labels:
+  namespace:
+  name: webapp-green
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      run: webapp
+      version: v2.0.0
+  template:
+    metadata:
+      labels:
+        run: webapp
+        version: v2.0.0
+    spec:
+      containers:
+      - image: kalise/deploy-webapp:latest
+        name: webapp
+        env:
+        - name: VERSION
+          value: v2.0.0
+        ports:
+        - name: root
+          containerPort: 8080
+          protocol: TCP
+        - name: probe
+          containerPort: 8086
+          protocol: TCP
+        - name: metrics
+          containerPort: 9101
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8086
+            scheme: HTTP
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /live
+            port: 8086
+            scheme: HTTP
+          periodSeconds: 15

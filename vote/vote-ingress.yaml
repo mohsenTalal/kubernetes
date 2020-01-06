@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: vote
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    traefik.frontend.rule.type: PathPrefixStrip
+spec:
+  rules:
+  - host: kubernetes.noverit.com
+    http:
+      paths:
+      - path: /vote
+        backend:
+          serviceName: vote
+          servicePort: 5000

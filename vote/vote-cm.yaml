@@ -1,0 +1,22 @@
+apiVersion: v1
+data:
+  seed_data.json: |
+    {
+     "poll": "Champion League Winner",
+     "question": "Who will win the Champion League?",
+     "options": [ "Juventus",
+                  "Milan",
+                  "Inter",
+                  "Barcelona",
+                  "Real Madrid",
+                  "Manchester City",
+                  "Arsenal",
+                  "Bayern Munich",
+                  "Borussia Dortmund",
+                  "Malaga"
+                ]
+    }
+kind: ConfigMap
+metadata:
+  name: seeds
+  namespace:
